@@ -1,0 +1,312 @@
+<html>
+
+<head>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+    <script src="https://kit.fontawesome.com/b4d42f1d6e.js" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+
+<div id="app">
+  <img alt="Vue logo" src="./assets/logo.png">
+
+  <span v-if="seen">Now you see me</span>
+
+  <button type="button" class="btn btn-secondary btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled>
+    Pipe Upload Tools v0.0 Liquid-Ooze
+  </button>
+
+
+  <!--1st_element-->
+  <div class="row py-20">
+
+    <div class="col">
+
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_manufacturer" v-on:click="showAddMfugModal=true">Add Manufacturer </button>
+        <!-- pops-out1 -->
+        <div class="modal fade" id="add_manufacturer" tabindex="-1" aria-labelledby="ADDmanufacturer" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title text-danger" >Add Mfug</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close" v-on:click="showAddMfugModal=false"></button>
+            </div>
+
+            
+            <form action="php/mfug.php" method="post">
+
+            <div class="modal-body">
+
+                
+                <div class="mb-6">
+                    
+                    <label for="InputMfug"> Manufacturer: </label>
+                    
+                    <div class="form-group">
+                        <input id="InputMfug" name="mfug" placeholder="your mfug" v-model="inputt.mfug">
+                    </div>
+                </div>
+                
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit"  class="btn btn-success" v-on:click="submitManufacturer()" >Submit Manufacturer </button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+            </div>
+
+            </form>
+
+            </div>
+
+            
+        </div>
+        </div>
+        
+    </div>
+
+    <div class="col">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_material">Add Material </button>
+        <!-- pops-out2 -->
+        <div class="modal fade" id="add_material" tabindex="-1" aria-labelledby="ADDmaterial" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-danger">Add Material</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+            </div>
+
+            <!--2-->
+            <form action="php/material.php" method="post">
+
+                <div class="modal-body">
+
+                    <div class="mb-6">
+                    <label for="InputMaterial"> Material: </label>
+                    <input id="InputMaterial" placeholder="your material" v-model="inputt_material.material" >
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                <button type="submit"  class="btn btn-success" v-on:click="submitMaterial()"> Submit Material </button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                </div>
+
+            </form>   
+
+        </div>
+
+
+
+           
+        </div>
+        </div>
+
+    </div>
+
+    <div class="col">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_catagory">Add Catagory  </button>
+        <!-- pops-out3 -->
+        <div class="modal fade" id="add_catagory" tabindex="-1" aria-labelledby="ADDcatagory" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title text-danger" >Add Catagory</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+            </div>
+            <!--3-->
+            <form action="php/catagory.php" method="post">
+
+            <div class="modal-body">
+                <form>
+                <div class="mb-6">
+                    <label for="InputCatagory"> Catagory: </label>
+                    <input id="InputCatagory" placeholder="your catagory" v-model="inputt_catagory.catagory" >
+                </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit"  class="btn btn-success" v-on:click="submitCatagory()"> Submit Catagory </button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+            </div>
+            
+            </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="col">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_sub">Add SubCatagory  </button>
+        <!--pops-out4-->
+        <div class="modal fade" id="add_sub" tabindex="-1" aria-labelledby="ADDitem" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title text-danger" >Add SubCatagory</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+            </div>
+            <!--4-->
+            <form action="php/subcatagory.php" method="post">
+
+            <div class="modal-body">
+                <form>
+                <div class="mb-6">
+                    <label for="InputSubCatagory"> SubCatagory: </label>
+                    <input id="InputSubCatagory" placeholder="your SubCatagory"  v-model="inputt_subcatagory.subcatagory" >
+                </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit"  class="btn btn-success">Submit SubCatagory </button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+            </div>
+
+            </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="col">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_item">Add Item  </button>
+        <!--pops-out5-->
+        <div class="modal fade" id="add_item" tabindex="-1" aria-labelledby="ADDitem" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title text-danger" >Add Item</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+            </div>
+
+            <!--5-->
+            <form action="php/item.php" method="post">
+
+            <div class="modal-body">
+                
+                <div class="mb-6">
+                    <label for="InputItem"> Item: </label>
+                    <input id="InputItem" placeholder="your Item" v-model="inputt_item.item">
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit"  class="btn btn-success" v-on:click="submitItem()"> Submit Item </button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+            </div>
+
+            </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+  </div>
+
+
+  <!--2nd_element-->
+  <div class="row mx-5 my-5 ">
+          
+    <div class="col">
+
+        <div class="col-md-2">
+        manufacturer
+        </div>
+
+        <div class="col-md-6">
+            <select name="" class="form-select" id="" v-for= " inputt in databaseList" :key="inputt.mfug" >
+                
+                <option> {{ inputt.mfug }} </option>
+                {{ inputt.mfug }}
+            </select>
+        </div>  
+
+    </div>
+
+    <div class="col">
+
+        <div class="col-md-2">
+        material
+        </div>
+
+        <div class="col-md-6">
+        <select name="" class="form-select" id="" >
+            <option>ma1</option>
+        
+        </select>
+        </div>  
+
+    </div>
+
+        <div class="col">
+
+        <div class="col-md-2">
+            catagory
+        </div>
+
+        <div class="col-md-6">
+            <select name="" class="form-select" id="" >
+            <option>c1</option>
+            
+            </select>
+        </div>  
+
+        </div>
+  </div>
+
+  <!--2.5_element-->
+  <div class="alert alert-success" v-if="showAlertGood">success alert</div>
+  <div class="alert alert-danger" v-if="showAlertBad">error alert</div>
+  
+  <!--3rd_element-->
+  <div class="">  
+    <table class="table table-bordered table-stripped ">
+        <thead>
+        <tr class="bg-primary text-center text-light">
+            <th scope="col">Image</th>
+            <th scope="col">Name</th>
+            <th scope="col">Code</th>
+            <th scope="col">Spec</th>
+            <th scope="col">edit</th>
+            <th scope="col">trush</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td scope="row">[img]</td>
+            <td scope="row">999</td>
+            <td scope="row">2</td>
+            <td scope="row">1</td>
+            <td>
+              <a href="#" class="text-success" v-on:click="showEditModal">
+                <i class="fa fa-edit"></i>
+              </a>
+            </td>
+            <td><i class="fa fa-trash"></i></td>
+        </tr>
+        </tbody>
+    </table>
+    </div>  
+</div>
+
+
+<script src="./myjs.js"></script>
+
+<style>
+
+</style>
+
+</html>
