@@ -21,6 +21,7 @@ $abc = "CREATE TABLE IF NOT EXISTS ALL_MATERIAL (MATERIAL_KEY int AUTO_INCREMENT
  
 $def = "ALTER TABLE ALL_MATERIAL AUTO_INCREMENT=1;";
 $run = $conn -> query($abc);
+
 echo "-3. ", $run; 
 
 if($run){
@@ -31,10 +32,14 @@ if($run){
   $sql = "INSERT INTO ALL_MATERIAL VALUES ( DEFAULT, '$material'); ";
 
   if (mysqli_query($conn, $sql )){
+
     print ("-5.Company Added v2.");
+
   }
   else{
+
     print ("-5.Error!".mysqli_error($conn));
+    
   }
 
 }else{

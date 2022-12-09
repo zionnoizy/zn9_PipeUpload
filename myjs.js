@@ -4,11 +4,14 @@ new Vue({
 
     data() {
       return {
-        seen: false,
+        errorMessage: "",
+        successMessage : "",
+
+        seen: true,
         showAlertGood: false,
         showAlertBad: false,
         
-        databaseList: [],
+        databaseList: [] ,
         databaseListMaterial: [],
         databaseListCatagory: [],
         databaseListSubCatagory: [],
@@ -18,7 +21,9 @@ new Vue({
         inputt_material: {material: ""},
         inputt_catagory: {catagory: ""},
         inputt_subcatagory: {subcatagory: ""},
-        inputt_item: {item: ""} //new to be more
+        inputt_item: {item: ""}, //new to be more
+
+        selected: {}
       };
     },
     
@@ -30,22 +35,47 @@ new Vue({
 
       readMfug(){
         //{headers: {'Content-Type': 'application/json'}
-        axios.get("http://localhost/products_db/read_php/read_mfug.php?action=read").then(function(response){
+
+
+        axios.get("http://localhost/products_db/read_php/read_mfug.php?action=read").then(function(response) {
           let json = response.data;
+          this.databaseList = response.data.show_all_mfug;
+
+          console.log("AA. ", app.databaseList );
+
+
+
+          //databaseList.push("AAA");
+          //console.log("db", app.databaseList);
+          /*
+          for (let i=0; i < json.length; ++i){
+
+            app.databaseList = (json[i].MFUG_NAME);
+
+            console.log("><", this.databaseList);
+
+          }
+
+
+          console.log("><b", this.databaseList);
+
+
 
           if (response.data.error){
             app.errorMessage = response.data.message;
-            app.databaseList = response.data.users;
-            console.log("NO", response.data.error);
+            app.databaseList = response.data.inputt;
+            console.log("NO Readed, ", response.data.error );
           }
 
           else{
             app.successMessage = response.data.message;
-            console.log("YES", json);
-          }
+            app.databaseList = json.show_all_mfug;
 
+            console.log("YES Readed4, ", json.show_all_mfug   );
+          }
+          */
           
-        });
+        }.bind(this));
 
       },
       
@@ -74,7 +104,7 @@ new Vue({
         app.errorMessage = "";
         app.successMessage = "";
 
-        let formData2 = this.convertToFormData(app.inputt);
+        let formData2 = this.convertToFormData(app.inputt_material);
 
         this.axios.post("http://localhost/products_db/php/material.php?action=create", formData2 ).then(function(response){ //find correct url
           
@@ -93,7 +123,7 @@ new Vue({
         app.errorMessage = "";
         app.successMessage = "";
 
-        let formData3 = convertToFormData(app.inputt);
+        let formData3 = convertToFormData(app.inputt_catagory);
 
         axios.post("http://localhost/products_db/php/catagory.php?action=create", formData3 ).then(function(response){ //find correct url
           
@@ -112,7 +142,7 @@ new Vue({
         app.errorMessage = "";
         app.successMessage = "";
 
-        let formData4 = convertToFormData(app.inputt);
+        let formData4 = convertToFormData(app.inputt_subcatagory);
 
         axios.post("http://localhost/products_db/php/subcatagory.php?action=create", formData4 ).then(function(response){ //find correct url
           

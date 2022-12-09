@@ -17,7 +17,7 @@ echo "-1. ", $mfug ,"\n";
 echo "-2. \n"; 
 
 //MFUG_KEY int NOT NULL AUTO_INCREMENT, ... , PRIMARY KEY (MFUG_KEY)
-$abc = "CREATE TABLE IF NOT EXISTS ALL_MFUG (MFUG_KEY int AUTO_INCREMENT primary key NOT NULL, MFUG_NAME VARCHAR(50) NOT NULL ); ";
+$abc = "CREATE TABLE IF NOT EXISTS ALL_MFUG (mfugkey int AUTO_INCREMENT primary key NOT NULL, mfugname VARCHAR(50) NOT NULL ); ";
  
 $def = "ALTER TABLE ALL_MFUG AUTO_INCREMENT=1;";
 $run = $conn -> query($abc);
