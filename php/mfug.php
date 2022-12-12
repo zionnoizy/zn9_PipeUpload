@@ -30,7 +30,7 @@ if($run){
   //DEFAULT
   $sql = "INSERT INTO ALL_MFUG VALUES ( DEFAULT, '$mfug'); ";
 
-  if (mysqli_query($conn, $sql )){
+  if (mysqli_query( $conn, $sql )){
     print ("-5.Company Added v2.");
   }
   else{
