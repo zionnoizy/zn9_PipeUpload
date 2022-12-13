@@ -24,6 +24,7 @@ new Vue({
         inputt_material: {material: ""},
         inputt_catagory: {catagory: ""},
         inputt_subcatagory: {subcatagoryname: "", choosen_catagory: ""},
+        
         inputt_item: {itemname: "", itemcode: "", itemdescription: "", itemvariant: "", 
           choosen_mfug: "", choosen_material: "", choosen_catagory: "", choosen_subcatagory: "",
           itemimage: "", itemts: ""}, //new to be more

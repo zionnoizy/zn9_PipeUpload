@@ -33,12 +33,12 @@
             <!--form-group  class="form-control" -->
             <div class="col form-group">
                 <label for="InputMfug"> 1)Name of Item: </label>
-                <input id="InputMfug" class="form-control" name="item_name " placeholder="item name"  v-model="inputt_item.itemname">
+                <input id="iin" class="form-control" name="itemname" placeholder="item name"  v-model="inputt_item.itemname">
             </div>
 
             <div class="col form-group">
                 <label for="InputMfug"> 2)Item Code: </label>
-                <input id="iic" class="form-control" name="item_code" placeholder="item code"  v-model="inputt_item.itemcode">
+                <input id="iic" class="form-control" name="itemcode" placeholder="item code"  v-model="inputt_item.itemcode">
             </div>
         </div>
 
@@ -46,11 +46,11 @@
 
             <div class="col form-group">
                 <label for="InputMfug"> 3)Item Description: </label>
-                <input id="iid" class="form-control" name="item_description" placeholder="item description"  v-model="inputt_item.itemdescription">
+                <input id="iid" class="form-control" name="itemdescription" placeholder="item description"  v-model="inputt_item.itemdescription">
             </div>
             <div class="col form-group">
                 <label for="InputMfug"> 4)Item variant: </label>
-                <input id="iiv" class="form-control" name="item_variant" placeholder="item variant"  v-model="inputt_item.itemvariant">
+                <input id="iiv" class="form-control" name="itemvariant" placeholder="item variant"  v-model="inputt_item.itemvariant">
             </div>
         </div>
 
@@ -67,7 +67,7 @@
                     [Manufacturer]
                     </div>
         
-                    <div class="  col-md-6">
+                    <div class="  col-md-6" v-model="inputt_item.choosen_mfug">
                         
                         <!--class="form-select"-->
                         <select class="form-select" >
@@ -93,7 +93,7 @@
                     </div>
         
                     <div class="col-md-6">
-                        <select class="form-select" >
+                        <select class="form-select" v-model="inputt_material.choosen_material" >
 
                             <option v-for="show_all_material in databaseListMaterial"> 
             
@@ -116,7 +116,7 @@
                     </div>
         
                     <div class="col-md-6">
-                        <select class="form-select" >
+                        <select class="form-select" v-model="inputt_material.choosen_catagory" >
 
                             <option v-for="show_all_catagroy in databaseListCatagory"> 
             
@@ -137,7 +137,7 @@
                     </div>
         
                     <div class="col-md-6">
-                        <select class="form-select" >
+                        <select class="form-select" v-model="inputt_material.choosen_subcatagory" >
 
                             <option v-for="show_all_subcatagory in databaseListSubCatagory"> 
             
@@ -172,7 +172,7 @@
 
             <div class="col">
                 <label for="InputMfug"> 6)Upload Technical Sheet: </label>
-                <input type="file" id="iits" name="item_tech_sheet" placeholder="item tech sheet" v-on:change="">
+                <input type="file" id="iits" class="file-btn" name="iits" ref="item_tc" placeholder="item tech sheet" >
             </div>
         </div>
 
