@@ -67,12 +67,12 @@
                     [Manufacturer]
                     </div>
         
-                    <div class="  col-md-6" v-model="inputt_item.choosen_mfug">
-                        
-                        <!--class="form-select"-->
-                        <select class="form-select" >
+                    <div class="  col-md-6" >
 
-                            <option v-for="show_all_mfug in databaseList"> 
+
+                        <select name="choosen_mfug" class="form-select"  v-model="inputt_item.choosen_mfug">
+
+                            <option class="form-select" v-for="show_all_mfug in databaseList"> 
                                 
                                 {{ show_all_mfug.mfugname }} 
                             
@@ -93,7 +93,7 @@
                     </div>
         
                     <div class="col-md-6">
-                        <select class="form-select" v-model="inputt_material.choosen_material" >
+                        <select class="form-select" name="choosen_material" v-model="inputt_item.choosen_material" >
 
                             <option v-for="show_all_material in databaseListMaterial"> 
             
@@ -116,7 +116,7 @@
                     </div>
         
                     <div class="col-md-6">
-                        <select class="form-select" v-model="inputt_material.choosen_catagory" >
+                        <select class="form-select" name="choosen_catagory" v-model="inputt_item.choosen_catagory" >
 
                             <option v-for="show_all_catagroy in databaseListCatagory"> 
             
@@ -137,7 +137,8 @@
                     </div>
         
                     <div class="col-md-6">
-                        <select class="form-select" v-model="inputt_material.choosen_subcatagory" >
+
+                        <select name="choosen_subcatagory" class="form-select" v-model="inputt_item.choosen_subcatagory" >
 
                             <option v-for="show_all_subcatagory in databaseListSubCatagory"> 
             
@@ -178,8 +179,8 @@
 
         
         <!-- form end  -->
-    </br>
-    </br>
+        </br>
+        </br>
         <div class="text-center">
             
             <button type="submit"  class="btn btn-success"  v-on:click="submitItem()" >Submit Item </button>
@@ -187,7 +188,10 @@
             <a href="test.html" type="button" class="btn btn-light" >Back To Home Page</a>
 
         </div>
+
     </form>
+
+
     </div>
 
 

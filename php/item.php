@@ -25,11 +25,10 @@ $filename = $_FILES["iii"]["name"];
 $tempname = $filename;
 
 
-//$folder = "./stored_images/" . $filename;
-$folder  = "./image/" . $filename;
-
-
-/////echo $filename, '====', '====', $folder;
+$ichoosen_mfug = $_POST['choosen_mfug'];
+$ichoosen_material = $_POST['choosen_material'];
+$ichoosen_catagory = $_POST['choosen_catagory'];
+$ichoosen_subcatagory = $_POST['choosen_subcatagory'];
 
 
 //create table
@@ -38,6 +37,7 @@ $abc = "CREATE TABLE IF NOT EXISTS ALL_ITEM (itemkey int AUTO_INCREMENT primary 
   ichoosen_mfug VARCHAR(50) NOT NULL, ichoosen_material VARCHAR(50) NOT NULL, ichoosen_catagory VARCHAR(50) NOT NULL, ichoosen_subcatagory VARCHAR(50) NOT NULL,
   ichoosen_mfugkey VARCHAR(50) NOT NULL, ichoosen_materialkey VARCHAR(50) NOT NULL, ichoosen_catagorykey VARCHAR(50) NOT NULL, ichoosen_subcatagorykey VARCHAR(50) NOT NULL
   ); ";
+
 
 $run = $conn -> query($abc);
 
@@ -53,7 +53,7 @@ if(isset($_FILES["iii"]["name"])){
   $file_size =$_FILES['iii']['size'];
   $file_tmp =$_FILES['iii']['tmp_name'];
   $file_type=$_FILES['iii']['type'];
-  $file_ext=strtolower(end(explode('.',$_FILES['iii']['name'])));
+
 
   $expensions= array("jpeg","jpg","png");
   if(file_exists($file_name)) {
@@ -87,34 +87,37 @@ if(isset($_FILES["iii"]["name"])){
 }
 //2tc
 //////////////////////////////////////////////////////
-// if(isset($_FILES["iits"]["name"])){
-//   $errors= array();
-//   $tc = $_FILES['iits']['name'];
-//   $tc_size =$_FILES['iits']['size'];
-//   $tc_tmp =$_FILES['iits']['tmp_name'];
-//   $tc_type=$_FILES['iits']['type'];
-//   $tc_ext=strtolower(end(explode('.',$_FILES['iii']['name'])));
+if(isset($_FILES["iits"]["name"])){
+  $errors= array();
+  $tc = $_FILES['iits']['name'];
+  $tc_size =$_FILES['iits']['size'];
+  $tc_tmp =$_FILES['iits']['tmp_name'];
+  $tc_type=$_FILES['iits']['type'];
 
 
-//   if(empty($errors)==true){
-//     //".".$file_ext
-//     $destination2 = dirname(dirname(dirname(dirname(__FILE__))))."/htdocs/products_db/stored_images/";
 
-//     echo $destination;
-//     //chown($destination, 0755);
-//     move_uploaded_file($info['name'], $destination.$info['name']);
+  if(empty($errors)==true){
+    //".".$file_ext
+    $destination2 = dirname(dirname(dirname(dirname(__FILE__))))."/htdocs/products_db/stored_tc/";
+
+    echo $destination;
+    //chown($destination, 0755);
+    move_uploaded_file($info['name'], $destination2.$info['name']);
 
 
-//     move_uploaded_file($file_tmp, $destination.$file_name);
-//     echo "Success";
-//     echo "<script>window.close();</script>";
+    move_uploaded_file($file_tmp, $destination2.$file_name);
 
-//   }
+    echo "Success";
+    echo "<script>window.close();</script>";
 
-//   else{
-//      print_r($errors);
-//   }
-// }
+  }
+
+  else{
+     print_r($errors);
+  }
+}
+
+
 //////////////////////////////////////////////////////
 if($run){
   
@@ -122,10 +125,12 @@ if($run){
 
   //DEFAULT
   $sql = "INSERT INTO ALL_ITEM VALUES ( DEFAULT, '$itemname', '$itemcode', 
-  '$itemdescription', '$itemvariant','$filename', '7', 
-  '8', '9', '10', '11',
-  '12', '13', '14', '15'
-  ); ";
+          '$itemdescription', '$itemvariant','$filename', '$tc', 
+          '$ichoosen_mfug', '$ichoosen_material', '$ichoosen_catagory', '$ichoosen_subcatagory',
+          '12', '13', '14', '15'
+          ); ";
+
+
   if (mysqli_query($conn, $sql )){
     print (".Company Added v2.");
 

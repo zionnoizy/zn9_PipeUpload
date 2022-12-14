@@ -24,7 +24,7 @@
     <p>add all four catagory first so that you can add item.</p>
 
     <div> 
-        <h1>-------------------------------------------------------------------------</h1>
+        <h1 class="text-center">-------------------------------------------------------------------------</h1>
     </div>
   <!--1st_element-->
   <div class="row py-20">
@@ -209,7 +209,7 @@
   </div>
 
     <div> 
-        <h1>-------------------------------------------------------------------------</h1>
+        <h1 class="text-center">-------------------------------------------------------------------------</h1>
     </div>
 
   <!--2nd_element-->
@@ -219,7 +219,7 @@
     <div class="col">
 
         <div class="col-md-2">
-        {manufacturer}
+            <b> <p style="color:#239B56">{manufacturer} </p></b>
         </div>
 
         <div class="col-md-6">
@@ -227,9 +227,9 @@
 
             <select class="form-select" >
 
-                <option v-for="show_all_mfug in databaseList"> 
-
-                    {{show_all_mfug.mfugname}} </option>
+                <option v-for="show_all_mfug in databaseList" style="color:#239B56;font-weight: bold;"> 
+                    
+                    {{show_all_mfug.mfugname}}  </option>
 
                 <!-- {{show_all_mfug.mfugkey}} -->
         
@@ -246,14 +246,14 @@
     <div class="col">
 
         <div class="col-md-2">
-            {material}
+            <b> <p style="color:#D68910">{material} </p></b>
         </div>
 
         <div class="col-md-6">
 
             <select class="form-select" >
 
-                <option v-for="show_all_material in databaseListMaterial"> 
+                <option v-for="show_all_material in databaseListMaterial" style="color:#D68910;font-weight: bold;"> 
 
                     {{show_all_material.materialname}} </option>
 
@@ -267,14 +267,14 @@
         <div class="col">
 
         <div class="col-md-2">
-            {catagory}
+            <b> <p style="color:#2980B9">{catagory} </p></b>
         </div>
 
         <div class="col-md-6">
 
             <select class="form-select" >
 
-                <option v-for="show_all_catagroy in databaseListCatagory"> 
+                <option v-for="show_all_catagroy in databaseListCatagory" style="color:#2980B9;font-weight: bold;"> 
 
                     {{show_all_catagroy.catagoryname}} </option>
 
@@ -298,11 +298,22 @@
   <div class="">  
     <table class="table table-bordered table-stripped ">
         <thead>
-        <tr class="bg-primary text-center text-light">
+        <tr class="bg-primary text-center text-light" >
             <th scope="col">Image</th>
+            <th scope="col">Key 
+                <a href="#" class="text-success" >
+                    <i class="fa fa-up-down"></i>
+                </a>
+            </th>
             <th scope="col">Name</th>
             <th scope="col">Code</th>
-            <th scope="col">Spec</th>
+
+
+            <th scope="col"> <b> <p style="color:#239B56">Choosen Manufacturer</p></b></th>
+            <th scope="col"> <b> <p style="color:#D68910">Choosen Material</p></b></th>
+            <th scope="col"> <b> <p style="color:#2980B9">Choosen Catagory</p></b></th>
+
+
             <th scope="col">edit</th>
             <th scope="col">trush</th>
         </tr>
@@ -312,16 +323,31 @@
         <tbody>
 
         <tr v-for="show_all_item in databaseListItem">
+           
 
-            <td scope="row">[img]</td>
-            <td scope="row">999</td>
-            <td scope="row">2</td>
-            <td scope="row">1</td>
+            <td scope="row"> 
+                <img 
+                    :src="`stored_images/${show_all_item.itemimage}`" 
+                    alt="show_all_item.itemimage"
+                    style="max-width:50%; max-height:50%;" > 
+            </td>
+            <td scope="row">{{ show_all_item.itemkey }}</td>
+            <td scope="row">{{ show_all_item.itemname }}</td>
+            <td scope="row">{{ show_all_item.itemcode }}</td>
+
+            <td scope="row"> <b> <p style="color:#239B56"> {{ show_all_item.ichoosen_mfug }} </p>  </b></td>
+            <td scope="row"> <b> <p style="color:#D68910"> {{ show_all_item.ichoosen_material }} </p>  </b></td>
+            <td scope="row"> <b> <p style="color:#2980B9"> {{ show_all_item.ichoosen_catagory }} </p>  </b></td>
+
+
+
+
             <td>
                 <!-- v-on:click="showEditModal" -->
               <a href="#" class="text-success" >
                 <i class="fa fa-edit"></i>
               </a>
+
             </td>
             <td><i class="fa fa-trash"></i></td>
         </tr>
@@ -331,8 +357,10 @@
 </div>
 
 
-<script src="./myjs.js"></script>
+<script type="module" src="./myjs.js"></script>
+<script>
 
+</script>
 <style>
 .z
 {

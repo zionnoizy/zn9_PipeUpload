@@ -26,22 +26,29 @@ new Vue({
         inputt_subcatagory: {subcatagoryname: "", choosen_catagory: ""},
         
         inputt_item: {itemname: "", itemcode: "", itemdescription: "", itemvariant: "", 
-          choosen_mfug: "", choosen_material: "", choosen_catagory: "", choosen_subcatagory: "",
-          itemimage: "", itemts: ""}, //new to be more
+                      ichoosen_mfug: "", ichoosen_material: "", ichoosen_catagory: "", ichoosen_subcatagory: "",
+                      itemimage: "", itemts: ""}, //new to be more
 
         selected: {}
       };
     },
-    
+    computed: {
+
+   },
     mounted(){
       this.readMfug();
       this.readMaterial();
       this.readCatagory();
       this.readSubCatagory();
+      this.readItem();
     },
     
     methods:{
-      
+
+      getImg(url) {
+        return require(`@/htdocs/products_db/stored_images/${url}`);
+      },
+
       onFileChange(e) {
         var files = e.target.files || e.dataTransfer.files;
         if (!files.length)
@@ -83,7 +90,7 @@ new Vue({
 
         axios.get("http://localhost/products_db/read_php/read_catagory.php?action=read").then(function(response) {
 
-
+          sortTable
 
           this.databaseListCatagory =  response.data.show_all_catagory  ;
 
@@ -104,6 +111,20 @@ new Vue({
 
 
           console.log("DD. ", this.databaseListSubCatagory );
+          
+        }.bind(this));
+
+      },
+
+      readItem(){
+
+        axios.get ("http://localhost/products_db/read_php/read_item.php?action=read").then(function(response) {
+
+
+          this.databaseListItem =  response.data.show_all_item  ;
+
+
+          console.log("EE. ", this.databaseListItem );
           
         }.bind(this));
 
@@ -215,6 +236,7 @@ new Vue({
         axios.post("http://localhost/products_db/php/item.php?action=create", formData5 ).then(function(response){ //find correct url
           
           if (response.data.error){
+
             app.errorMessage = response.data.message;
           }
 
@@ -230,6 +252,21 @@ new Vue({
         for(value in data){
           fd.append(value, data[value]);
         }
+      },
+
+      editItem(){
+        axios.get("http://localhost/products_db/read_php/update_item.php" ).then(function(response){ //find correct url
+          
+          if (response.data.error){
+            
+            app.errorMessage = response.data.message;
+          }
+
+          else{
+            app.successMessage = response.data.message;
+          }
+
+        });
       }
 
       
