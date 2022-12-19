@@ -20,9 +20,7 @@ $itemdescription = $_POST['itemdescription'];
 $itemvariant = $_POST['itemvariant'];
 
 echo $itemname, $itemcode, $itemdescription, $itemvariant;
-//1image
-$filename = $_FILES["iii"]["name"];
-$tempname = $filename;
+
 
 
 $ichoosen_mfug = $_POST['choosen_mfug'];
@@ -58,24 +56,25 @@ if(isset($_FILES["iii"]["name"])){
   $expensions= array("jpeg","jpg","png");
   if(file_exists($file_name)) {
     echo "Sorry, file already exists.";
-    }
+  }
+
   if(in_array($file_ext,$expensions)=== false){
      $errors[]="extension not allowed, please choose a JPEG or PNG file.";
   }
 
-  if($file_size > 2097152){
-     $errors[]='File size must be excately 2 MB';
-  }
 
   if(empty($errors)==true){
+    
     //".".$file_ext
     $destination = dirname(dirname(dirname(dirname(__FILE__))))."/htdocs/products_db/stored_images/";
+
     echo $destination;
     //chown($destination, 0755);
     //move_uploaded_file($info['name'], $destination.$info['name']);
 
 
     move_uploaded_file($file_tmp, $destination.$file_name);
+
     echo "Success";
     echo "<script>window.close();</script>";
 
@@ -88,6 +87,7 @@ if(isset($_FILES["iii"]["name"])){
 //2tc
 //////////////////////////////////////////////////////
 if(isset($_FILES["iits"]["name"])){
+
   $errors= array();
   $tc = $_FILES['iits']['name'];
   $tc_size =$_FILES['iits']['size'];
@@ -123,6 +123,7 @@ if($run){
   
   echo "=4. tablet created\n";
 
+
   //DEFAULT
   $sql = "INSERT INTO ALL_ITEM VALUES ( DEFAULT, '$itemname', '$itemcode', 
           '$itemdescription', '$itemvariant','$filename', '$tc', 
@@ -131,14 +132,16 @@ if($run){
           ); ";
 
 
+
   if (mysqli_query($conn, $sql )){
     print (".Company Added v2.");
 
-    $get_cur_itemkey = "SELECT itemkey FROM ALL_ITEM";
+
   }
   else{
     print ("error!".mysqli_error($conn));
   }
+
 
   $get_cur_itemkey = "SELECT itemkey FROM ALL_ITEM  ";
   $fci = mysqli_query($conn, $get_cur_itemkey);

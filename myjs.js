@@ -16,7 +16,7 @@ new Vue({
         databaseListCatagory: [],
         databaseListSubCatagory: [],
         databaseListItem: [],
-
+        databaseListOneItem: [],
 
         anotherdatabaseList: [] ,
 
@@ -29,7 +29,13 @@ new Vue({
                       ichoosen_mfug: "", ichoosen_material: "", ichoosen_catagory: "", ichoosen_subcatagory: "",
                       itemimage: "", itemts: ""}, //new to be more
 
-        selected: {}
+        one_item: {itemname: "", itemcode: "", itemdescription: "", itemvariant: ""},
+        inputt_edititem: {edit_itemname: "", edit_itemcode: "", edit_itemdescription: "", edit_itemvariant: ""},
+
+        delete_itemkey: {itemkey: ""},
+        
+        modalInfo: {itemname: "", itemcode: "", itemdescription: "", itemvariant: ""}
+
       };
     },
     computed: {
@@ -41,6 +47,7 @@ new Vue({
       this.readCatagory();
       this.readSubCatagory();
       this.readItem();
+      //this.readOneItem();
     },
     
     methods:{
@@ -90,7 +97,7 @@ new Vue({
 
         axios.get("http://localhost/products_db/read_php/read_catagory.php?action=read").then(function(response) {
 
-          sortTable
+
 
           this.databaseListCatagory =  response.data.show_all_catagory  ;
 
@@ -104,7 +111,7 @@ new Vue({
       readSubCatagory(){
 
         axios.get("http://localhost/products_db/read_php/read_subcatagory.php?action=read").then(function(response) {
-
+          this.databaseList =  response.data.show_all_mfug  ;
 
 
           this.databaseListSubCatagory =  response.data.show_all_subcatagory  ;
@@ -125,6 +132,24 @@ new Vue({
 
 
           console.log("EE. ", this.databaseListItem );
+          
+        }.bind(this));
+
+      },
+
+      //comming soon.
+      readOneItem(show_one_item){
+
+        app.one_item = show_one_item;
+        
+
+        axios.get ("http://localhost/products_db/read_php/read_specific_item.php?action=read").then(function(response) {
+
+
+          this.databaseListOneItem =  response.data.show_one_item  ;
+
+
+          console.log("FF. ", this.databaseListOneItem );
           
         }.bind(this));
 
@@ -246,16 +271,14 @@ new Vue({
 
         });
       },
-      convertToFormData(data){
-        let fd = new FormData();
-
-        for(value in data){
-          fd.append(value, data[value]);
-        }
+      
+      doSomeWork(data){
+        this.eachItem = data
       },
 
       editItem(){
-        axios.get("http://localhost/products_db/read_php/update_item.php" ).then(function(response){ //find correct url
+        let formData6 = this.convertToFormData(app.inputt_edititem);
+        axios.post("http://localhost/products_db/update_php/update_item.php?action=update", formData6 ).then(function(response){ //find correct url
           
           if (response.data.error){
             
@@ -267,11 +290,50 @@ new Vue({
           }
 
         });
-      }
+      },
 
-      
-      
+      showDynamicItem(data){
 
+        console.log(" -----> " + data.itemkey);
+
+        this.modalInfo.itemname = data.itemname;
+        this.modalInfo.itemkey = data.itemkey;
+        this.modalInfo.itemdescription = data.itemdescription;
+        this.modalInfo.itemvariant = data.itemvariant;
+        this.modalText = 'text-to-show-thisssssssss';
+      },
+
+      deleteItem(itemkey){
+
+        
+
+        
+        axios.get("http://localhost/products_db/delete_php/delete_item.php", {
+
+          params: {
+            itemkey: itemkey
+          }
+
+        })
+        .then(function(response){
+          console.log(response.data);
+          
+
+        })
+        .catch(function (error) {
+          console.log("ERROR GET_TEMPLETE(CPY).PHP    ");
+
+
+      }); 
+        
+      },
+      convertToFormData(data){
+        let fd = new FormData();
+
+        for(value in data){
+          fd.append(value, data[value]);
+        }
+      },
 
     }
   });

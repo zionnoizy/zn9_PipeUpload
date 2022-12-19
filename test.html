@@ -322,7 +322,7 @@
 
         <tbody>
 
-        <tr v-for="show_all_item in databaseListItem">
+        <tr v-for="show_all_item in databaseListItem" :key="show_all_item.itemkey"   >
            
 
             <td scope="row"> 
@@ -338,19 +338,161 @@
             <td scope="row"> <b> <p style="color:#239B56"> {{ show_all_item.ichoosen_mfug }} </p>  </b></td>
             <td scope="row"> <b> <p style="color:#D68910"> {{ show_all_item.ichoosen_material }} </p>  </b></td>
             <td scope="row"> <b> <p style="color:#2980B9"> {{ show_all_item.ichoosen_catagory }} </p>  </b></td>
+            <td>
+                <!-- href="#editt" readOneItem(show_all_item)-->
+
+              <a class="text-success" >
+                <button :data-bs-target="'#editt-' + show_all_item.itemkey" data-bs-toggle="modal" class="btn btn-outline-info fa fa-edit"   > </button>
+                <!--pops-out-EDIT-->
+                <div class="modal fade" :id="'editt-' + show_all_item.itemkey" tabindex="-1"   aria-labelledby="ADDitem" aria-hidden="true"    >
+                    <div class="modal-dialog" >
+
+                        <div class="modal-content">
+                            
+                            <div class="modal-header">
+
+                                <h4 class="modal-title text-danger" >Edit (Coming Soon)</h4>
+
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"     ></button>
+
+                            </div>
+
+                            <!--4-->
+                            <form action="php/update_item.php" method="post">
+            
+                            <div class="modal-body">
+                                <!-- v-for="show_one_catagory in databaseListOneItem" -->
+                                <div class="mb-6" >
+
+                                    <label for=""> Item Key </label>
+                                    
+                                    <input type="text" id="ik" :value="`${show_all_item.itemkey}`" disabled> 
+
+                                    <!-- v-model="inputt_edititem.edit_itemname" -->
+                                    <label for=""> Item Name </label>
+                                    <input id="edit_itemname" name="edit_itemname"  :value="`${show_all_item.itemname}`"  >
+
+                                    <label for=""> Item Code </label>
+
+                                    <!-- v-model="inputt_edititem.edit_itemname" -->
+                                    <input id="edit_itemcode" name="edit_itemcode" placeholder="your ItemCode" :value="`${show_all_item.itemcode}`"   >
+
+                                    <!-- v-model="inputt_edititem.edit_itemdescription" -->
+                                    <label for=""> Item Description </label>
+                                    <input id="edit_itemdescription" name="edit_itemdescription" placeholder="your ItemDescription" :value="`${show_all_item.itemdescription}`"   >
+                                    
+                                    <!-- v-model="inputt_edititem.edit_itemvariant" -->
+                                    <label for=""> Item Variant </label>
+                                    <input id="edit_itemvariant" name="edit_itemvariant" placeholder="your ItemVariant" :value="`${show_all_item.itemvariant}`"   >
+                                    
+                                    </br>
+                                    
+                                    <!-- v-model="inputt_subcatagory.choosen_catagory -->
+                                    <label for=""> Item Manufacturer </label>
+                                    <select name="choosen_mfug" disabled >
+
+                                        <option hidden="true"> 
+            
+                                            {{show_all_item.ichoosen_mfug}} 
+            
+                                        </option>
+                            
+                                
+                                
+                                    </select>
+                                    </br>
+
+                                    <label for=""> Item Material </label>
+                                    <select name="choosen_material" disabled >
+
+                                        <option hidden="true"> 
+            
+                                            {{show_all_item.ichoosen_material}} 
+            
+                                        </option>
+                            
+                                
+                                
+                                    </select>
+                                    </br>
+
+                                    <label for=""> Item Catagory </label>
+                                    <select name="choosen_catagory" disabled >
+                                        
+                                        <option hidden="true"> 
+            
+                                            {{show_all_item.ichoosen_catagory}} 
+            
+                                        </option>
+                            
+                                
+                                
+                                    </select>
+                                </div>
+                                
+                            </div>
+            
+                            <div class="modal-footer">
+                                
+                                <button type="submit"  class="btn btn-success"  v-on:click="submitSubCatagory()" >Edit Item </button>
+                                <button type="button" class="btn btn-light" data-bs-dismiss="modal" >Close</button>
+
+                            </div>
+            
+                            </form>
+                        </div>
+                    </div>
+            </div>
+              </a>
+            </td>
 
 
+
+
+             
 
 
             <td>
-                <!-- v-on:click="showEditModal" -->
-              <a href="#" class="text-success" >
-                <i class="fa fa-edit"></i>
-              </a>
+                <a class="text-success" >
 
-            </td>
-            <td><i class="fa fa-trash"></i></td>
+                    <button :data-bs-target="'#trushh-' + show_all_item.itemkey" data-bs-toggle="modal" class="btn btn-outline-info fa fa-trash"  > </button>
+                        <!--pops-out-DELETE-->
+                        <div class="modal fade" :id="'trushh-' + show_all_item.itemkey"  aria-labelledby="ADDitem" aria-hidden="true">
+
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h4 class="modal-title text-danger" >Delete </h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                                    </div>
+
+                                    <!--4-->
+                                    <form action="delete_php/delete_item.php" method="post">
+                    
+                                    <div class="modal-body">
+
+                                        <h2>Are you sure want to delete Item w/ Key=[ <h3 v-model="delete_itemkey.itemkey"> {{ show_all_item.itemkey }} </h3>]?</h2>
+                                        
+                                    </div>
+                    
+                                    <div class="modal-footer">
+                                        <button type="submit"  class="btn btn-success"  v-on:click="deleteItem(`${show_all_item.itemkey}`)">Yes </button>
+                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">No</button>
+                                    </div>
+                    
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                  </a>
+
+                  
+                
+
         </tr>
+
+
         </tbody>
     </table>
     </div>  
