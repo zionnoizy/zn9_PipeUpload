@@ -1,5 +1,7 @@
 <?php
-
+Header('Access-Control-Allow-Origin: *'); //for allow any domain, insecure
+Header('Access-Control-Allow-Headers: *'); //for allow any headers, insecure
+Header('Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE'); //method allowed
 $conn = new mysqli("localhost", "root", "", "zion_test_db");
 
 if ($conn->connect_error){
@@ -24,7 +26,6 @@ mysqli_free_result($result);
 echo json_encode( $json, JSON_UNESCAPED_SLASHES );
 */
 //////////////////////
-
 $result = array('error'=>false);
 $action = "";
 
@@ -50,7 +51,6 @@ if($action == "read"){
 
         array_push($show_all_mfug, $row);
 
-        //print_r ( $show_all_mfug);
     }
 
     $result['show_all_mfug'] = $show_all_mfug;

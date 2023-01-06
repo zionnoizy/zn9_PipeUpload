@@ -26,220 +26,219 @@
     <div> 
         <h1 class="text-center">-------------------------------------------------------------------------</h1>
     </div>
-  <!--1st_element-->
-  <div class="row py-20">
 
-    <div class="col">
+    <!--1st_element-->
+    <div class="row py-20">
 
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_manufacturer" v-on:click="showAddMfugModal=true">Add Manufacturer </button>
-        <!-- pops-out1 -->
-        <div class="modal fade" id="add_manufacturer" tabindex="-1" aria-labelledby="ADDmanufacturer" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
+        <div class="col">
 
-            <div class="modal-header">
-                <h4 class="modal-title text-danger" >Add Mfug</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close" v-on:click="showAddMfugModal=false"></button>
-            </div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_manufacturer" v-on:click="showAddMfugModal=true">Add Manufacturer </button>
+            <!-- pops-out1 -->
+            <div class="modal fade" id="add_manufacturer" tabindex="-1" aria-labelledby="ADDmanufacturer" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
 
-            
-            <form action="php/mfug.php" method="post">
-
-            <div class="modal-body">
-
-                <div class="mb-6">
-                    
-                    <label for="InputMfug"> Manufacturer: </label>
-                    
-                    <div class="form-group">
-                        <input id="InputMfug" name="mfug" placeholder="your mfug" v-model="inputt.mfug">
-                    </div>
-                </div>
-                
-
-            </div>
-
-            <div class="modal-footer">
-                <button type="submit"  class="btn btn-success" v-on:click="submitManufacturer()" >Submit Manufacturer </button>
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-            </div>
-
-            </form>
-
-            </div>
-
-            
-        </div>
-        </div>
-        
-    </div>
-
-    <div class="col">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_material">Add Material </button>
-        <!-- pops-out2 -->
-        <div class="modal fade" id="add_material" tabindex="-1" aria-labelledby="ADDmaterial" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-
-                <h4 class="modal-title text-danger">Add Material</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
-            </div>
-
-            <!--2-->
-            <form action="php/material.php" method="post">
-
-                <div class="modal-body">
-
-                    <div class="mb-6">
-                    <label for="InputMaterial"> Material: </label>
-                    <input id="InputMaterial"  name="material" placeholder="your material" v-model="inputt_material.material" >
-                    </div>
-
-                </div>
-
-                <div class="modal-footer">
-                <button type="submit"  class="btn btn-success" v-on:click="submitMaterial()"> Submit Material </button>
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                </div>
-
-            </form>   
-
-        </div>
-
-
-
-           
-        </div>
-        </div>
-
-    </div>
-
-    <div class="col">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_catagory">Add Catagory  </button>
-        <!-- pops-out3 -->
-        <div class="modal fade" id="add_catagory" tabindex="-1" aria-labelledby="ADDcatagory" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-            <h4 class="modal-title text-danger" >Add Catagory</h4>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
-            </div>
-            <!--3-- action="php/catagory.php" method="post"-->
-            <form action="php/catagory.php" method="post" >
-
-            <div class="modal-body">
-
-                <div class="mb-6">
-                    <label for="InputCatagory"> Catagory: </label>
-                    <input id="InputCatagory" name="catagory" placeholder="your catagory" v-model="inputt_catagory.catagory" >
-                </div>
-
-            </div>
-
-            <div class="modal-footer">
-                <button type="submit"  class="btn btn-success" v-on:click="submitCatagory()"> Submit Catagory </button>
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-            </div>
-            
-            </form>
-            </div>
-        </div>
-    </div>
-    </div>
-
-    <div class="col">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_sub">Add SubCatagory  </button>
-        <!--pops-out4-->
-        <div class="modal fade" id="add_sub" tabindex="-1" aria-labelledby="ADDitem" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
                 <div class="modal-header">
-                <h4 class="modal-title text-danger" >Add SubCatagory</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                    <h4 class="modal-title text-danger" >Add Mfug</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close" v-on:click="showAddMfugModal=false"></button>
                 </div>
-                <!--4-->
-                <form action="php/subcatagory.php" method="post">
+
+                
+                <form action="php/mfug.php" method="post">
 
                 <div class="modal-body">
-                    
+
                     <div class="mb-6">
-                        <label for="InputSubCatagory"> SubCatagory </label>
-                        <input id="InputSubCatagory" name="subcatagoryname" placeholder="your SubCatagory"  v-model="inputt_subcatagory.subcatagoryname" >
-
-                        <label class="z"> Choose Catagory Already Inserted </label>
-                    </br>
-                </br>
                         
-
-                        <select name="choosen_catagory" v-model="inputt_subcatagory.choosen_catagory"   >
-                            
-
-                            <option v-for="show_all_catagory in databaseListCatagory"> 
-
-                                {{show_all_catagory.catagoryname}} 
-
-                            </option>
-                
-                    
-                    
-                        </select>
+                        <label for="InputMfug"> Manufacturer: </label>
+                        
+                        <div class="form-group">
+                            <input id="InputMfug" name="mfug" placeholder="your mfug" v-model="inputt.mfug">
+                        </div>
                     </div>
                     
+
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit"  class="btn btn-success"  v-on:click="submitSubCatagory()">Submit SubCatagory </button>
+                    <button type="submit"  class="btn btn-success" v-on:click="submitManufacturer()" >Submit Manufacturer </button>
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                 </div>
 
                 </form>
+
+                </div>
+
+                
+            </div>
+            </div>
+            
+        </div>
+
+        <div class="col">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_material">Add Material </button>
+            <!-- pops-out2 -->
+            <div class="modal fade" id="add_material" tabindex="-1" aria-labelledby="ADDmaterial" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title text-danger">Add Material</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                </div>
+
+                <!--2-->
+                <form action="php/material.php" method="post">
+
+                    <div class="modal-body">
+
+                        <div class="mb-6">
+                        <label for="InputMaterial"> Material: </label>
+                        <input id="InputMaterial"  name="material" placeholder="your material" v-model="inputt_material.material" >
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                    <button type="submit"  class="btn btn-success" v-on:click="submitMaterial()"> Submit Material </button>
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                    </div>
+
+                </form>   
+
+            </div>
+
+
+
+            
+            </div>
+            </div>
+
+        </div>
+
+        <div class="col">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_catagory">Add Catagory  </button>
+            <!-- pops-out3 -->
+            <div class="modal fade" id="add_catagory" tabindex="-1" aria-labelledby="ADDcatagory" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="modal-title text-danger" >Add Catagory</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                </div>
+                <!--3-- action="php/catagory.php" method="post"-->
+                <form action="php/catagory.php" method="post" >
+
+                <div class="modal-body">
+
+                    <div class="mb-6">
+                        <label for="InputCatagory"> Catagory: </label>
+                        <input id="InputCatagory" name="catagory" placeholder="your catagory" v-model="inputt_catagory.catagory" >
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit"  class="btn btn-success" v-on:click="submitCatagory()"> Submit Catagory </button>
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                </div>
+                
+                </form>
+                </div>
             </div>
         </div>
-    </div>
-    </div>
+        </div>
 
-    <div class="col">
-        <a href="item.html" type="button" class="btn btn-info" >Go To Item Page  </a>
-        <!--pops-out5-->
-        
+        <div class="col">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_sub">Add SubCatagory  </button>
+            <!--pops-out4-->
+            <div class="modal fade" id="add_sub" tabindex="-1" aria-labelledby="ADDitem" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h4 class="modal-title text-danger" >Add SubCatagory</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                    </div>
+                    <!--4-->
+                    <form action="php/subcatagory.php" method="post">
+
+                    <div class="modal-body">
+                        
+                        <div class="mb-6">
+                            <label for="InputSubCatagory"> SubCatagory </label>
+                            <input id="InputSubCatagory" name="subcatagoryname" placeholder="your SubCatagory"  v-model="inputt_subcatagory.subcatagoryname" >
+
+                            <label class="z"> Choose Catagory Already Inserted </label>
+                        </br>
+                    </br>
+                            
+
+                            <select name="choosen_catagory" v-model="inputt_subcatagory.choosen_catagory"   >
+                                
+
+                                <option v-for="show_all_catagory in databaseListCatagory"> 
+
+                                    {{show_all_catagory.catagoryname}} 
+
+                                </option>
+                    
+                        
+                        
+                            </select>
+                        </div>
+                        
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit"  class="btn btn-success"  v-on:click="submitSubCatagory()">Submit SubCatagory </button>
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                    </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="col">
+            <a href="item.html" type="button" class="btn btn-info" >Go To Item Page  </a>
+            <!--pops-out5-->
+            
+
+        </div>
 
     </div>
-
-  </div>
 
     <div> 
         <h1 class="text-center">-------------------------------------------------------------------------</h1>
+
+
+
     </div>
 
   <!--2nd_element-->
   <div class="row mx-5 my-5 ">
-    <p>{v} This session will display from the database {v}</p>   
+    <p>{v} This session will display from the database {v}</p>  
+
     </br>   
+
     <div class="col">
 
         <div class="col-md-2">
-            <b> <p style="color:#239B56">{manufacturer} </p></b>
+            <b> <p style="color:#239B56"> {manufacturer} </p> </b>
         </div>
 
         <div class="col-md-6">
 
-
             <select class="form-select" >
-
-                <option v-for="show_all_mfug in databaseList" style="color:#239B56;font-weight: bold;"> 
-                    
-                    {{show_all_mfug.mfugname}}  </option>
-
-                <!-- {{show_all_mfug.mfugkey}} -->
-        
+                <option v-for="show_all_mfug in databaseList2" style="color:#239B56;font-weight: bold;"> 
+                    {{ show_all_mfug.mfugname }}
+                </option>
             </select>
-
-
 
         </div>  
 
-        
+
 
     </div>
 
@@ -252,13 +251,11 @@
         <div class="col-md-6">
 
             <select class="form-select" >
-
+                
                 <option v-for="show_all_material in databaseListMaterial" style="color:#D68910;font-weight: bold;"> 
 
                     {{show_all_material.materialname}} </option>
 
-
-        
             </select>
         </div>  
 
@@ -292,7 +289,7 @@
 
   <div> 
     <h1>-------------------------------------------------------------------------</h1>
-</div>
+  </div>
 
   <!--3rd_element-->
   <div class="">  
@@ -338,6 +335,8 @@
             <td scope="row"> <b> <p style="color:#239B56"> {{ show_all_item.ichoosen_mfug }} </p>  </b></td>
             <td scope="row"> <b> <p style="color:#D68910"> {{ show_all_item.ichoosen_material }} </p>  </b></td>
             <td scope="row"> <b> <p style="color:#2980B9"> {{ show_all_item.ichoosen_catagory }} </p>  </b></td>
+
+
             <td>
                 <!-- href="#editt" readOneItem(show_all_item)-->
 
@@ -361,34 +360,33 @@
                             <form action="php/update_item.php" method="post">
             
                             <div class="modal-body">
-                                <!-- v-for="show_one_catagory in databaseListOneItem" -->
+
                                 <div class="mb-6" >
 
                                     <label for=""> Item Key </label>
                                     
                                     <input type="text" id="ik" :value="`${show_all_item.itemkey}`" disabled> 
 
-                                    <!-- v-model="inputt_edititem.edit_itemname" -->
+                                    
                                     <label for=""> Item Name </label>
                                     <input id="edit_itemname" name="edit_itemname"  :value="`${show_all_item.itemname}`"  >
 
                                     <label for=""> Item Code </label>
-
-                                    <!-- v-model="inputt_edititem.edit_itemname" -->
                                     <input id="edit_itemcode" name="edit_itemcode" placeholder="your ItemCode" :value="`${show_all_item.itemcode}`"   >
 
-                                    <!-- v-model="inputt_edititem.edit_itemdescription" -->
+                                    
                                     <label for=""> Item Description </label>
                                     <input id="edit_itemdescription" name="edit_itemdescription" placeholder="your ItemDescription" :value="`${show_all_item.itemdescription}`"   >
                                     
-                                    <!-- v-model="inputt_edititem.edit_itemvariant" -->
+                                    
                                     <label for=""> Item Variant </label>
                                     <input id="edit_itemvariant" name="edit_itemvariant" placeholder="your ItemVariant" :value="`${show_all_item.itemvariant}`"   >
                                     
                                     </br>
                                     
-                                    <!-- v-model="inputt_subcatagory.choosen_catagory -->
+                                    
                                     <label for=""> Item Manufacturer </label>
+
                                     <select name="choosen_mfug" disabled >
 
                                         <option hidden="true"> 
@@ -472,7 +470,12 @@
                     
                                     <div class="modal-body">
 
-                                        <h2>Are you sure want to delete Item w/ Key=[ <h3 v-model="delete_itemkey.itemkey"> {{ show_all_item.itemkey }} </h3>]?</h2>
+                                        <h2>Are you sure want to delete Item w/ Key
+                                            <!-- <div v-model="delete_itemkey.itemkey"> 
+                                                {{ show_all_item.itemkey }} 
+                                            </div> -->
+
+                                        </h2>
                                         
                                     </div>
                     
@@ -495,7 +498,8 @@
 
         </tbody>
     </table>
-    </div>  
+  </div>
+
 </div>
 
 

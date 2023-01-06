@@ -18,7 +18,7 @@ new Vue({
         databaseListItem: [],
         databaseListOneItem: [],
 
-        anotherdatabaseList: [] ,
+        databaseList2: [] ,
 
         inputt: {mfug: ""},
         inputt_material: {material: ""},
@@ -42,7 +42,8 @@ new Vue({
 
    },
     mounted(){
-      this.readMfug();
+      //this.readMfug();
+      this.readMfug2();
       this.readMaterial();
       this.readCatagory();
       this.readSubCatagory();
@@ -62,22 +63,34 @@ new Vue({
           return;
         this.createImage(files[0]);
       },
-      
+      /*
       readMfug(){
 
         axios.get("http://localhost/products_db/read_php/read_mfug.php?action=read").then(function(response) {
 
-          let json = response.data;
 
           this.databaseList =  response.data.show_all_mfug  ;
-          //this.anotherDatabaseList =  JSON.parse(JSON.stringify(response.data.show_all_mfug))  ;
 
-          console.log("AA. ", this.databaseList );
+
+          console.log("AA2. ", this.databaseList );
           
         }.bind(this));
 
       },
+      */
+      readMfug2(){
 
+        axios.get("http://localhost/products_db/read_php/read_mfug.php?action=read").then(function(response) {
+
+
+          this.databaseList2 =  response.data.show_all_mfug  ;
+
+
+          console.log("ABCCC. ", this.databaseList2 );
+          
+        }.bind(this));
+
+      },
       readMaterial(){
 
         axios.get("http://localhost/products_db/read_php/read_material.php?action=read").then(function(response) {
@@ -164,7 +177,7 @@ new Vue({
         let formData1 = convertToFormData(app.inputt);
 
         this.axios.post("http://localhost/products_db/php/mfug.php?action=create", formData1 ).then(function(response){ 
-          databaseListCatagory
+          
           if (response.data.error){
 
             app.errorMessage = response.data.message;

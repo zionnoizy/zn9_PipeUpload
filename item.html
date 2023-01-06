@@ -61,20 +61,21 @@
         <div>
 
             <div class="row py-20">
+                
                 <div class="col">
 
                     <div class="col-md-2">
-                    [Manufacturer]
+                        [Manufacturer]
                     </div>
         
                     <div class="  col-md-6" >
+                        
+                        <!--v-model="inputt_item.choosen_mfug"-->
+                        <select  class="form-select" name="choosen_mfug" v-model="inputt_item.ichoosen_mfug" >
 
-
-                        <select name="choosen_mfug" class="form-select"  v-model="inputt_item.choosen_mfug">
-
-                            <option class="form-select" v-for="show_all_mfug in databaseList"> 
-                                
-                                {{ show_all_mfug.mfugname }} 
+                            <option  v-for="(show_all_mfug, index) in databaseList2"> 
+                                <!-- {{ index }} : -->
+                               {{ show_all_mfug.mfugname }}
                             
                             </option>
             
@@ -95,6 +96,8 @@
                     <div class="col-md-6">
                         <select class="form-select" name="choosen_material" v-model="inputt_item.choosen_material" >
 
+                           
+
                             <option v-for="show_all_material in databaseListMaterial"> 
             
                                 {{show_all_material.materialname}} </option>
@@ -108,8 +111,10 @@
 
                 
             </div>
+
             </br>
             </br>
+
             <div class="row py-20">
                 <div class="col">
 
@@ -144,7 +149,8 @@
 
                             <option v-for="show_all_subcatagory in databaseListSubCatagory"> 
             
-                                {{show_all_subcatagory.subcatagoryname}} </option>
+                                {{show_all_subcatagory.subcatagoryname}} 
+                            </option>
             
             
                     

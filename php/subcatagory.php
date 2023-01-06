@@ -20,6 +20,7 @@ echo "%%2. \n", $choosen_catagory;
 
 
 $find_choosen = "SELECT catagorykey FROM ALL_CATAGORY WHERE catagoryname='$choosen_catagory'";
+
 $run = mysqli_query($conn, $find_choosen);
   if($run){
       while($row = mysqli_fetch_array($run)){
@@ -43,7 +44,7 @@ if($run){
   $sql = "INSERT INTO ALL_SUBCATAGORY VALUES ( DEFAULT, '$subcatagoryname', '$fc', '$choosen_catagory'); ";
 
   if (mysqli_query($conn, $sql )){
-    print ("%%5.Company Added v2.");
+    print ("%%5.Company Added v2." );
   }
   else{
     print ("%%5.Error!".mysqli_error($conn));

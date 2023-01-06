@@ -18,15 +18,49 @@ $itemname = $_POST['itemname'];
 $itemcode = $_POST['itemcode'];
 $itemdescription = $_POST['itemdescription'];
 $itemvariant = $_POST['itemvariant'];
+//echo $itemname, $itemcode, $itemdescription, $itemvariant;
 
-echo $itemname, $itemcode, $itemdescription, $itemvariant;
-
-
-
+//
 $ichoosen_mfug = $_POST['choosen_mfug'];
+
+//echo "test is first..", $ichoosen_mfug;
+
 $ichoosen_material = $_POST['choosen_material'];
 $ichoosen_catagory = $_POST['choosen_catagory'];
 $ichoosen_subcatagory = $_POST['choosen_subcatagory'];
+
+$find_mfugkey = "SELECT mfugkey FROM ALL_MFUG WHERE mfugname='$ichoosen_mfug'";
+$run1 = mysqli_query($conn, $find_mfugkey);
+if($run1){
+    while($row = mysqli_fetch_array($run1)){
+        $mfugk = $row['mfugkey'];
+        //echo "%%2.6, $mfugk";
+    }
+}
+$find_materialkey = "SELECT materialkey FROM ALL_MATERIAL WHERE materialname='$ichoosen_material'";
+$run2 = mysqli_query($conn, $find_materialkey);
+if($run2){
+    while($row = mysqli_fetch_array($run2)){
+        $mk = $row['materialkey'];
+        //echo "%%2.7, $mk";
+    }
+}
+$find_catagorykey = "SELECT catagorykey FROM ALL_CATAGORY WHERE catagoryname='$ichoosen_catagory'";
+$run3 = mysqli_query($conn, $find_catagorykey);
+if($run3){
+    while($row = mysqli_fetch_array($run3)){
+        $ck = $row['catagorykey'];
+        //echo "%%2.8, $ck";
+    }
+}
+$find_subcatagorykey = "SELECT subcatagorykey FROM ALL_SUBCATAGORY WHERE subcatagoryname='$ichoosen_subcatagory'";
+$run4 = mysqli_query($conn, $find_subcatagorykey);
+if($run4){
+    while($row = mysqli_fetch_array($run4)){
+        $sck = $row['subcatagorykey'];
+        //echo "%%2.9, $sck";
+    }
+}
 
 
 //create table
@@ -39,52 +73,47 @@ $abc = "CREATE TABLE IF NOT EXISTS ALL_ITEM (itemkey int AUTO_INCREMENT primary 
 
 $run = $conn -> query($abc);
 
-echo "=3. ", $run; 
-
+$result_msg = '';
+$result_msg2 = '';
 
 //1deal with image
 ////////////////////////////////////////////////////////
-if(isset($_FILES["iii"]["name"])){
+if(isset($_FILES["iii"]["name"])) {
 
   $errors= array();
+  
   $file_name = $_FILES['iii']['name'];
   $file_size =$_FILES['iii']['size'];
   $file_tmp =$_FILES['iii']['tmp_name'];
   $file_type=$_FILES['iii']['type'];
 
+  define ('SITE_ROOT', realpath(dirname(__FILE__)));
 
-  $expensions= array("jpeg","jpg","png");
-  if(file_exists($file_name)) {
-    echo "Sorry, file already exists.";
-  }
+  //change for your favorite path
+  $create_path = '/opt/lampp/htdocs/products_db/stored_images/'.$itemname. "/";
 
-  if(in_array($file_ext,$expensions)=== false){
-     $errors[]="extension not allowed, please choose a JPEG or PNG file.";
-  }
+  $destination = dirname(dirname(dirname(dirname(__FILE__))))."/htdocs/products_db/stored_images/".$itemname. "/";
 
+  mkdir($create_path, 0777, true);
 
-  if(empty($errors)==true){
-    
-    //".".$file_ext
-    $destination = dirname(dirname(dirname(dirname(__FILE__))))."/htdocs/products_db/stored_images/";
+  echo $destination;
 
-    echo $destination;
-    //chown($destination, 0755);
-    //move_uploaded_file($info['name'], $destination.$info['name']);
+  
+  $allow_type = array("jpeg","jpg","png",'gif');
 
+  if (in_array($file_name, $allow_type) === false){ //if value exist in array
 
-    move_uploaded_file($file_tmp, $destination.$file_name);
+    $result_msg = "IMG Type allowed. \n";
 
-    echo "Success";
-    echo "<script>window.close();</script>";
+    if ( move_uploaded_file( $file_tmp, $destination ) ){
+
+      $result_msg = "IMG Success upload file. \n";
+    }
 
   }
 
-  else{
-     print_r($errors);
-  }
+
 }
-//2tc
 //////////////////////////////////////////////////////
 if(isset($_FILES["iits"]["name"])){
 
@@ -95,70 +124,62 @@ if(isset($_FILES["iits"]["name"])){
   $tc_type=$_FILES['iits']['type'];
 
 
+  $create_path = dirname(dirname(dirname(dirname(__FILE__))))."/htdocs/products_db/stored_images/".$itemname. "/";
 
-  if(empty($errors)==true){
-    //".".$file_ext
-    $destination2 = dirname(dirname(dirname(dirname(__FILE__))))."/htdocs/products_db/stored_tc/";
+  $allow_type = array("pdf");
+  if(!file_exists($tc)){
 
-    echo $destination;
-    //chown($destination, 0755);
-    move_uploaded_file($info['name'], $destination2.$info['name']);
+    $result_msg2 = "TC File does not exist @@b. \n";
+
+    if(in_array($tc, $allow_type)) { //if value exist in array
 
 
-    move_uploaded_file($file_tmp, $destination2.$file_name);
+      if(move_uploaded_file( $tc_tmp, $create_path )){
 
-    echo "Success";
-    echo "<script>window.close();</script>";
+        $result_msg2 = "TC Success upload tc. \n";
+      }
+    }
+    else{
 
+      $result_msg2 = "TC not allowed type.";
+    }
   }
 
-  else{
-     print_r($errors);
-  }
 }
-
-
 //////////////////////////////////////////////////////
 if($run){
   
-  echo "=4. tablet created\n";
-
 
   //DEFAULT
   $sql = "INSERT INTO ALL_ITEM VALUES ( DEFAULT, '$itemname', '$itemcode', 
-          '$itemdescription', '$itemvariant','$filename', '$tc', 
+          '$itemdescription', '$itemvariant','$file_name', '$tc', 
           '$ichoosen_mfug', '$ichoosen_material', '$ichoosen_catagory', '$ichoosen_subcatagory',
-          '12', '13', '14', '15'
+          '$mfugk', '$mk', '$ck', '$sck'
           ); ";
 
-
-
   if (mysqli_query($conn, $sql )){
+
     print (".Company Added v2.");
 
-
   }
+
   else{
     print ("error!".mysqli_error($conn));
   }
 
+  $get_cur_itemkey = "SELECT itemkey FROM ALL_ITEM WHERE itemname='$itemname'";
 
-  $get_cur_itemkey = "SELECT itemkey FROM ALL_ITEM  ";
   $fci = mysqli_query($conn, $get_cur_itemkey);
-    if ($fci){
-        while($row = mysqli_fetch_array($fci)){
-            $cpy_id = $row['itemkey'];
-        }
+  if ($fci){
+    while($row = mysqli_fetch_array($fci)){
+        $cpy_id = $row['itemkey'];
     }
-    echo "$cpy_id";
+  }
+}
 
 
-
-}else{
-
-  echo "=4. table NOT created\n";
-
-}  
-
+//////////////////////////////////////////////////////////////////////////////////////////
+echo $result_msg;
+echo $result_msg2;
 
 ?>
