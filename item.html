@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/b4d42f1d6e.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    
     <title>Add Item Here</title>
 </head>
 <body>
-    <div id="app">
 
+    <div id="app">
         <img alt="Vue logo" src="./assets/logo.png">
         <img alt="Vue logo" src="./assets/logo.png">
         <img alt="Vue logo" src="./assets/logo.png">
@@ -22,182 +20,176 @@
 
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-secondary btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled>
-        ITEM Upload Tools v0.0 Liquid-Ooze
+            ITEM Upload Tools v0.0 Liquid-Ooze
         </button>
 
         <!-- form start // enctype="multipart/form-data" -->
-        <form action="php/item.php" method="post"  enctype="multipart/form-data">
-
-        <div class="row py-20">
-            
-            <!--form-group  class="form-control" -->
-            <div class="col form-group">
-                <label for="InputMfug"> 1)Name of Item: </label>
-                <input id="iin" class="form-control" name="itemname" placeholder="item name"  v-model="inputt_item.itemname">
-            </div>
-
-            <div class="col form-group">
-                <label for="InputMfug"> 2)Item Code: </label>
-                <input id="iic" class="form-control" name="itemcode" placeholder="item code"  v-model="inputt_item.itemcode">
-            </div>
-        </div>
-
-        <div class="row py-20">
-
-            <div class="col form-group">
-                <label for="InputMfug"> 3)Item Description: </label>
-                <input id="iid" class="form-control" name="itemdescription" placeholder="item description"  v-model="inputt_item.itemdescription">
-            </div>
-            <div class="col form-group">
-                <label for="InputMfug"> 4)Item variant: </label>
-                <input id="iiv" class="form-control" name="itemvariant" placeholder="item variant"  v-model="inputt_item.itemvariant">
-            </div>
-        </div>
-
-        <div> 
-            <h1>-------------------------------------------------------------------------</h1>
-        </div>
-
-        <div>
+        <form action="item.php" method="post"  enctype="multipart/form-data">
 
             <div class="row py-20">
                 
-                <div class="col">
+                <!--form-group  class="form-control" -->
+                <div class="col form-group">
+                    <label for="InputMfug"> 1)Name of Item: </label>
+                    <input id="iin" class="form-control" name="itemname" placeholder="item name"  v-model="inputt_item.itemname">
+                </div>
+                <div class="col form-group">
+                    <label for="InputMfug"> 2)Item Code: </label>
+                    <input id="iic" class="form-control" name="itemcode" placeholder="item code"  v-model="inputt_item.itemcode">
+                </div>
+                
+            </div>
+            <div class="row py-20">
 
-                    <div class="col-md-2">
-                        [Manufacturer]
-                    </div>
-        
-                    <div class="  col-md-6" >
+                <div class="col form-group">
+                    <label for="InputMfug"> 3)Item Description: </label>
+                    <input id="iid" class="form-control" name="itemdescription" placeholder="item description"  v-model="inputt_item.itemdescription">
+                </div>
+                <div class="col form-group">
+                    <label for="InputMfug"> 4)Item variant: </label>
+                    <input id="iiv" class="form-control" name="itemvariant" placeholder="item variant"  v-model="inputt_item.itemvariant">
+                </div>
+
+            </div>
+
+            <div> 
+                <h1>-------------------------------------------------------------------------</h1>
+            </div>
+
+            <div>
+                <div class="row py-20">
+                    
+                    <div class="col">
+
+                        <div class="col-md-2">
+                            [Manufacturer]
+                        </div>
+            
+                        <div class="  col-md-6" >
+                            
+                            <!--v-model="inputt_item.choosen_mfug"-->
+                            <select  class="form-select" name="choosen_mfug" v-model="inputt_item.ichoosen_mfug" >
+
+                                <option  v-for="(show_all_mfug, index) in databaseList2"> 
+                                    <!-- {{ index }} : -->
+                                {{ show_all_mfug.mfugname }}
+                                
+                                </option>
+                
+                                
                         
-                        <!--v-model="inputt_item.choosen_mfug"-->
-                        <select  class="form-select" name="choosen_mfug" v-model="inputt_item.ichoosen_mfug" >
+                            </select>
 
-                            <option  v-for="(show_all_mfug, index) in databaseList2"> 
-                                <!-- {{ index }} : -->
-                               {{ show_all_mfug.mfugname }}
-                            
-                            </option>
+                        </div>  
             
-                            
-                    
-                        </select>
-
-                    </div>  
-        
-                </div>
-
-                <div class="col">
-
-                    <div class="col-md-2">
-                    [Material]
                     </div>
-        
-                    <div class="col-md-6">
-                        <select class="form-select" name="choosen_material" v-model="inputt_item.choosen_material" >
 
-                           
+                    <div class="col">
 
-                            <option v-for="show_all_material in databaseListMaterial"> 
+                        <div class="col-md-2">
+                        [Material]
+                        </div>
             
-                                {{show_all_material.materialname}} </option>
-            
-            
-                    
-                        </select>
-                    </div>  
-        
-                </div>
-
+                        <div class="col-md-6">
+                            <select class="form-select" name="choosen_material" v-model="inputt_item.choosen_material" >
+                                <option v-for="show_all_material in databaseListMaterial"> 
+                                    {{show_all_material.materialname}} </option>
                 
-            </div>
-
-            </br>
-            </br>
-
-            <div class="row py-20">
-                <div class="col">
-
-                    <div class="col-md-2">
-                    [Catagory]
+                
+                        
+                            </select>
+                        </div>  
+            
                     </div>
-        
-                    <div class="col-md-6">
-                        <select class="form-select" name="choosen_catagory" v-model="inputt_item.choosen_catagory" >
 
-                            <option v-for="show_all_catagroy in databaseListCatagory"> 
-            
-                                {{show_all_catagroy.catagoryname}} </option>
-            
-            
                     
-                        </select>
-                    </div>  
-        
                 </div>
 
-                <div class="col">
-                    (*will change based on select Catagory)
-                    <div class="col-md-6">
-                    [Sub-Catagory]
-                    
+                </br>
+                </br>
+
+                <div class="row py-20">
+                    <div class="col">
+
+                        <div class="col-md-2">
+                        [Catagory]
+                        </div>
+            
+                        <div class="col-md-6">
+                            <select class="form-select" name="choosen_catagory" v-model="inputt_item.choosen_catagory" >
+
+                                <option v-for="show_all_catagroy in databaseListCatagory"> 
+                
+                                    {{show_all_catagroy.catagoryname}} 
+                                
+                                </option>
+                
+                
+                        
+                            </select>
+                        </div>  
+            
                     </div>
-        
-                    <div class="col-md-6">
 
-                        <select name="choosen_subcatagory" class="form-select" v-model="inputt_item.choosen_subcatagory" >
+                    <div class="col">
+                        (*will change based on select Catagory)
+                        <div class="col-md-6">
 
-                            <option v-for="show_all_subcatagory in databaseListSubCatagory"> 
+                        [Sub-Catagory]
+                        
+                        </div>
             
-                                {{show_all_subcatagory.subcatagoryname}} 
-                            </option>
+                        <div class="col-md-6">
+
+                            <select name="choosen_subcatagory" class="form-select" v-model="inputt_item.choosen_subcatagory" >
+
+                                <option v-for="show_all_subcatagory in databaseListSubCatagory"> 
+                
+                                    {{show_all_subcatagory.subcatagoryname}} 
+                                </option>
+                
+                
+                        
+                            </select>
+                        </div>  
             
-            
-                    
-                        </select>
-                    </div>  
-        
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div> 
+                <h1>-------------------------------------------------------------------------</h1>
+            </div>
+
+            <div class="text-center">
+
+                <div class="col">
+                    <label for="InputMfug"> 5)Upload Image: </label>
+                    <input type="file" id="iii" class="file-btn" name="iii" ref="item_image" placeholder="item image" >
+                </div>
+                </br>
+                </br>
+                <div class="col">
+                    <label for="InputMfug"> 6)Upload Technical Sheet: </label>
+                    <input type="file" id="iits" class="file-btn" name="iits" ref="item_tc" placeholder="item tech sheet" >
                 </div>
             </div>
 
-
-        </div>
-
-
-        <div> 
-            <h1>-------------------------------------------------------------------------</h1>
-        </div>
-
-        <div class="text-center">
-
-            <div class="col">
-                <label for="InputMfug"> 5)Upload Image: </label>
-
-                <input type="file" id="iii" class="file-btn" name="iii" ref="item_image" placeholder="item image" >
-            </div>
-            
-            </br>
-            </br>
-
-            <div class="col">
-                <label for="InputMfug"> 6)Upload Technical Sheet: </label>
-                <input type="file" id="iits" class="file-btn" name="iits" ref="item_tc" placeholder="item tech sheet" >
-            </div>
-        </div>
-
         
-        <!-- form end  -->
-        </br>
-        </br>
-        <div class="text-center">
-            
-            <button type="submit"  class="btn btn-success"  v-on:click="submitItem()" >Submit Item </button>
+            <!-- form end  -->
+            </br>
+            </br>
+            <div class="text-center">
+                
+                <button type="submit"  class="btn btn-success"  v-on:click="submitItem()" >Submit Item </button>
 
-            <a href="test.html" type="button" class="btn btn-light" >Back To Home Page</a>
+                <a href="test.html" type="button" class="btn btn-light" >Back To Home Page</a>
 
-        </div>
+            </div>
 
-    </form>
+        </form>
 
 
     </div>

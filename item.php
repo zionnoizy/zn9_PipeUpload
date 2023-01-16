@@ -9,8 +9,9 @@ else{
     echo "Connection Success!\r\n";
 }
 
-ini_set("display_errors", "1");
-error_reporting(E_ALL);
+ini_set ('display_errors', 1);
+ini_set ('display_startup_errors', 1);
+error_reporting (E_ALL);
 
 
 
@@ -20,11 +21,7 @@ $itemdescription = $_POST['itemdescription'];
 $itemvariant = $_POST['itemvariant'];
 //echo $itemname, $itemcode, $itemdescription, $itemvariant;
 
-//
 $ichoosen_mfug = $_POST['choosen_mfug'];
-
-//echo "test is first..", $ichoosen_mfug;
-
 $ichoosen_material = $_POST['choosen_material'];
 $ichoosen_catagory = $_POST['choosen_catagory'];
 $ichoosen_subcatagory = $_POST['choosen_subcatagory'];
@@ -81,69 +78,72 @@ $result_msg2 = '';
 if(isset($_FILES["iii"]["name"])) {
 
   $errors= array();
-  
   $file_name = $_FILES['iii']['name'];
   $file_size =$_FILES['iii']['size'];
   $file_tmp =$_FILES['iii']['tmp_name'];
   $file_type=$_FILES['iii']['type'];
 
   define ('SITE_ROOT', realpath(dirname(__FILE__)));
-
-  //change for your favorite path
-  $create_path = '/opt/lampp/htdocs/products_db/stored_images/'.$itemname. "/";
-
-  $destination = dirname(dirname(dirname(dirname(__FILE__))))."/htdocs/products_db/stored_images/".$itemname. "/";
-
-  mkdir($create_path, 0777, true);
-
-  echo $destination;
-
   
-  $allow_type = array("jpeg","jpg","png",'gif');
+  $itemname = str_replace(' ', '_', $itemname);
+  //change for your favorite path
+  $create_path = 'xampp\\htdocs\\zn9_PipeUpload\\stored_images'.$itemname. "\\";
+  $destination = dirname(dirname(dirname(dirname(__FILE__))))."xampp\\htdocs\\zn9_PipeUpload\\stored_images\\".$itemname. "\\";
 
-  if (in_array($file_name, $allow_type) === false){ //if value exist in array
 
-    $result_msg = "IMG Type allowed. \n";
-
-    if ( move_uploaded_file( $file_tmp, $destination ) ){
-
-      $result_msg = "IMG Success upload file. \n";
-    }
-
+  //mkdir only if not exist
+  if (!file_exists($create_path)){
+    mkdir($create_path, 0777, true);
   }
+
+  $d2 = getcwd().DIRECTORY_SEPARATOR;
+  $tp = $d2 ."stored_images\\" . $itemname . "\\". basename($file_name);
+
+  echo $tp;
+  
+  $allow_type = array("jpeg","jpg","png","gif");
+  // if (in_array($file_name, $allow_type) === false){ //if value exist in array
+  //   $result_msg = "IMG Type allowed. \n";
+
+  if ( move_uploaded_file( $file_tmp, $tp ) ){ //cannot move file!1
+    $result_msg = "IMG Success upload file. \n";
+  }
+
+  //}
 
 
 }
-//////////////////////////////////////////////////////
+
 if(isset($_FILES["iits"]["name"])){
 
   $errors= array();
   $tc = $_FILES['iits']['name'];
   $tc_size =$_FILES['iits']['size'];
   $tc_tmp =$_FILES['iits']['tmp_name'];
-  $tc_type=$_FILES['iits']['type'];
+  $tc_type =$_FILES['iits']['type'];
+
+  $d3 = getcwd().DIRECTORY_SEPARATOR;
+  $tp = $d3 ."stored_images\\" . $itemname . "\\". basename($tc);
+
+  $destination = dirname(dirname(dirname(dirname(__FILE__))))."/xampp/htdocs/zn9_PipeUpload/stored_images/".$itemname. "/";
+  $allow_type = array("pdf"); 
+
+  $find_type = explode(".", $_FILES["iits"]["name"]); //
+  $entension = end ($find_type);
 
 
-  $create_path = dirname(dirname(dirname(dirname(__FILE__))))."/htdocs/products_db/stored_images/".$itemname. "/";
+  //
+  if(move_uploaded_file( $tc_tmp, $tp )){
 
-  $allow_type = array("pdf");
-  if(!file_exists($tc)){
+    $result_msg2 = "TC Success upload tc. \n";
 
-    $result_msg2 = "TC File does not exist @@b. \n";
-
-    if(in_array($tc, $allow_type)) { //if value exist in array
-
-
-      if(move_uploaded_file( $tc_tmp, $create_path )){
-
-        $result_msg2 = "TC Success upload tc. \n";
-      }
-    }
-    else{
-
-      $result_msg2 = "TC not allowed type.";
-    }
   }
+  //}
+  else{
+
+    $result_msg2 = "TC not upload tc.";
+  }
+  
 
 }
 //////////////////////////////////////////////////////
@@ -176,10 +176,8 @@ if($run){
     }
   }
 }
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
 echo $result_msg;
 echo $result_msg2;
 
+//header('Location: test.html');
 ?>

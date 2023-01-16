@@ -11,21 +11,17 @@ else{
 ini_set("display_errors", "1");
 error_reporting(E_ALL);
 
-//
 $material = $_POST['material'];
 echo "#1. ", $material ,"\n";
 echo "#2. \n"; 
 
 //MATERIAL_KEY int NOT NULL AUTO_INCREMENT, ... , PRIMARY KEY (MATERIAL_KEY)
 $abc = "CREATE TABLE IF NOT EXISTS ALL_MATERIAL (materialkey int AUTO_INCREMENT primary key NOT NULL, materialname VARCHAR(50) NOT NULL ); ";
- 
 $def = "ALTER TABLE ALL_MATERIAL AUTO_INCREMENT=1;";
 $run = $conn -> query($abc);
 
 echo "#3. ", $run; 
-
 if($run){
-  
   echo "#4. DEBUG: INSER_T $material UPLOADED\n";
   
   //DEFAULT
@@ -41,6 +37,7 @@ if($run){
     print ("#5.Error!".mysqli_error($conn));
     
   }
+  header('Location: test.html');
 
 }else{
   echo "#4. DEBUG: INSER_T $material INFO NOT UPDATED\n";

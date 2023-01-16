@@ -80,7 +80,7 @@ new Vue({
       */
       readMfug2(){
 
-        axios.get("http://localhost/products_db/read_php/read_mfug.php?action=read").then(function(response) {
+        axios.get("http://192.168.127.105:8080/zn9_PipeUpload/read_php/read_mfug.php?action=read").then(function(response) {
 
 
           this.databaseList2 =  response.data.show_all_mfug  ;
@@ -93,7 +93,7 @@ new Vue({
       },
       readMaterial(){
 
-        axios.get("http://localhost/products_db/read_php/read_material.php?action=read").then(function(response) {
+        axios.get("http://192.168.127.105:8080/zn9_PipeUpload/read_php/read_material.php?action=read").then(function(response) {
 
 
           this.databaseListMaterial =  response.data.show_all_material  ;
@@ -108,7 +108,7 @@ new Vue({
 
       readCatagory(){
 
-        axios.get("http://localhost/products_db/read_php/read_catagory.php?action=read").then(function(response) {
+        axios.get("http://192.168.127.105:8080/zn9_PipeUpload/read_php/read_catagory.php?action=read").then(function(response) {
 
 
 
@@ -123,7 +123,7 @@ new Vue({
 
       readSubCatagory(){
 
-        axios.get("http://localhost/products_db/read_php/read_subcatagory.php?action=read").then(function(response) {
+        axios.get("http://192.168.127.105:8080/zn9_PipeUpload/read_php/read_subcatagory.php?action=read").then(function(response) {
           this.databaseList =  response.data.show_all_mfug  ;
 
 
@@ -138,7 +138,7 @@ new Vue({
 
       readItem(){
 
-        axios.get ("http://localhost/products_db/read_php/read_item.php?action=read").then(function(response) {
+        axios.get ("http://192.168.127.105:8080/zn9_PipeUpload/read_php/read_item.php?action=read").then(function(response) {
 
 
           this.databaseListItem =  response.data.show_all_item  ;
@@ -156,7 +156,7 @@ new Vue({
         app.one_item = show_one_item;
         
 
-        axios.get ("http://localhost/products_db/read_php/read_specific_item.php?action=read").then(function(response) {
+        axios.get ("http://192.168.127.105:8080/zn9_PipeUpload/read_php/read_specific_item.php?action=read").then(function(response) {
 
 
           this.databaseListOneItem =  response.data.show_one_item  ;
@@ -176,7 +176,7 @@ new Vue({
 
         let formData1 = convertToFormData(app.inputt);
 
-        this.axios.post("http://localhost/products_db/php/mfug.php?action=create", formData1 ).then(function(response){ 
+        this.axios.post("http://192.168.127.105:8080/zn9_PipeUpload/php/mfug.php?action=create", formData1 ).then(function(response){ 
           
           if (response.data.error){
 
@@ -200,7 +200,7 @@ new Vue({
         let formData2 = convertToFormData(app.inputt_material);
 
         
-        axios.post("http://localhost/products_db/php/material.php?action=create", formData2 ).then(function(response){
+        axios.post("http://192.168.127.105:8080/zn9_PipeUpload/php/material.php?action=create", formData2 ).then(function(response){
           
           if (response.data.error){
 
@@ -224,7 +224,7 @@ new Vue({
         let formData3 = convertToFormData(app.inputt_catagory);
 
         
-        axios.post("http://localhost/products_db/php/catagory.php?action=create", formData3 ).then(function(response){ //find correct url
+        axios.post("http://192.168.127.105:8080/zn9_PipeUpload/php/catagory.php?action=create", formData3 ).then(function(response){ //find correct url
           
           if (response.data.error){
             app.errorMessage = response.data.message;
@@ -243,26 +243,44 @@ new Vue({
         app.errorMessage = "";
         app.successMessage = "";
 
-        console.log(app.inputt_subcatagory);
-
-
-        let formData4 = this.convertToFormData(app.inputt_subcatagory);
-
-        axios.post("http://localhost/products_db/php/subcatagory.php?action=create", formData4 ).then(function(response){ //find correct url
-          
-          if (response.data.error){
-
-            app.errorMessage = response.data.message;
-
+        if (document.getElementById("check_select_cat").value == 'undefined' || document.getElementById("check_select_cat").value == null ) {
+          if(document.body.contains(document.getElementById('my_id'))){ //
+            console.log("select_cat erorr pre existed");
           }
-
           else{
+            var z = document.createElement('p')
+            z.setAttribute("id", "my_id");
+            z.innerHTML = 'Choose Catagory Above.';
 
-            app.successMessage = response.data.message;
+            const menu = document.querySelector('.err_not_chosen_cat');
+            menu.appendChild(z);
+            alert("Select Subcatagory in catagroy");
 
           }
+          
+        }
+        
+        else{
+          let formData4 = this.convertToFormData(app.inputt_subcatagory);
+          
+          axios.post("http://localhost/products_db/php/subcatagory.php?action=create", formData4 ).then(function(response){ //find correct url
+            
+            if (response.data.error){
 
-        });
+              app.errorMessage = response.data.message;
+
+            }
+
+            else{
+
+              app.successMessage = response.data.message;
+
+            }
+
+          });
+          
+        }
+        
       },
       //5
       submitItem(){

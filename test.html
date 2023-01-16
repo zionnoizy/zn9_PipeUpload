@@ -319,15 +319,16 @@
 
         <tbody>
 
-        <tr v-for="show_all_item in databaseListItem" :key="show_all_item.itemkey"   >
+        <tr v-for="show_all_item in databaseListItem" :key="show_all_item.itemkey" :ref=""  >
            
 
             <td scope="row"> 
                 <img 
-                    :src="`stored_images/${show_all_item.itemimage}`" 
+                    :src="`stored_images/${show_all_item.itemname}/${show_all_item.itemimage}`" 
                     alt="show_all_item.itemimage"
                     style="max-width:50%; max-height:50%;" > 
             </td>
+
             <td scope="row">{{ show_all_item.itemkey }}</td>
             <td scope="row">{{ show_all_item.itemname }}</td>
             <td scope="row">{{ show_all_item.itemcode }}</td>
@@ -455,40 +456,40 @@
 
                     <button :data-bs-target="'#trushh-' + show_all_item.itemkey" data-bs-toggle="modal" class="btn btn-outline-info fa fa-trash"  > </button>
                         <!--pops-out-DELETE-->
-                        <div class="modal fade" :id="'trushh-' + show_all_item.itemkey"  aria-labelledby="ADDitem" aria-hidden="true">
+                    <div class="modal fade" :id="'trushh-' + show_all_item.itemkey"  aria-labelledby="ADDitem" aria-hidden="true">
 
-                            <div class="modal-dialog">
-                                <div class="modal-content">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
 
-                                    <div class="modal-header">
-                                        <h4 class="modal-title text-danger" >Delete </h4>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
-                                    </div>
-
-                                    <!--4-->
-                                    <form action="delete_php/delete_item.php" method="post">
-                    
-                                    <div class="modal-body">
-
-                                        <h2>Are you sure want to delete Item w/ Key
-                                            <!-- <div v-model="delete_itemkey.itemkey"> 
-                                                {{ show_all_item.itemkey }} 
-                                            </div> -->
-
-                                        </h2>
-                                        
-                                    </div>
-                    
-                                    <div class="modal-footer">
-                                        <button type="submit"  class="btn btn-success"  v-on:click="deleteItem(`${show_all_item.itemkey}`)">Yes </button>
-                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">No</button>
-                                    </div>
-                    
-                                    </form>
+                                <div class="modal-header">
+                                    <h4 class="modal-title text-danger" >Delete </h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
                                 </div>
+
+                                <!--4-->
+                                <form action="delete_php/delete_item.php" method="post">
+                
+                                <div class="modal-body">
+
+                                    <h2>Are you sure want to delete Item w/ Key
+                                        <!-- <div v-model="delete_itemkey.itemkey"> 
+                                            {{ show_all_item.itemkey }} 
+                                        </div> -->
+
+                                    </h2>
+                                    
+                                </div>
+                
+                                <div class="modal-footer">
+                                    <button type="submit"  class="btn btn-success"  v-on:click="deleteItem(`${show_all_item.itemkey}`)">Yes </button>
+                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">No</button>
+                                </div>
+                
+                                </form>
                             </div>
                         </div>
-                  </a>
+                    </div>
+                </a>
 
                   
                 

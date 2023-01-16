@@ -11,7 +11,6 @@ else{
 ini_set("display_errors", "1");
 error_reporting(E_ALL);
 
-//
 $catagory = $_POST['catagory'];
 echo "+1. ", $catagory ,"\n";
 echo "+2. \n"; 
@@ -37,6 +36,7 @@ if($run){
   else{
     print ("+5.Error!".mysqli_error($conn));
   }
+  header('Location: test.html');
 
 }else{
   echo "+4. DEBUG: INSER_T $catagory INFO NOT UPDATED\n";
